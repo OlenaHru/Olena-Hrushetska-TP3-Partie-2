@@ -12,7 +12,7 @@ namespace JeuDomino
         /// <summary>
         /// La plus grande valeur sur un domino
         /// </summary>
-        public const int MAX_VALUE = 6;
+        public const int MAX_VALUE = 7;
         
         private int gauche;
        

@@ -18,7 +18,7 @@ namespace JeuDomino
         /// <summary>
         /// Le calcul qui mene a 28 dominos... permet de changer MAX_VALUE et d'avoir un jeu complet
         /// </summary>
-        private const int NOMBRE_DOMINOS = (Domino.MAX_VALUE+1)* (Domino.MAX_VALUE + 2)/2;
+        public const int NOMBRE_DOMINOS = (Domino.MAX_VALUE+1)* (Domino.MAX_VALUE + 2)/2;
         // ou alors
         // private const int NOMBRE_DOMINOS = 28;
 

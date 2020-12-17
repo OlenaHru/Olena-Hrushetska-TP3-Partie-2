@@ -9,10 +9,12 @@ namespace JeuDomino
     /// </summary>
     public class Jeu
     {
+        private const int NOMBRE_JOUEURS = 4;
+
         /// <summary>
         /// Peut on diviser par 4 le nombre total de domino ici?
         /// </summary>
-        private const int NOMBRE_DOMINOS = 7;
+        private const int NOMBRE_DOMINOS = Paquet.NOMBRE_DOMINOS/ NOMBRE_JOUEURS;
 
         /// <summary>
         /// La liste de joueurs
@@ -31,13 +33,12 @@ namespace JeuDomino
         public Jeu()
         {
             paquet = new Paquet();
-            joueurs = new Joueur[4];
+            joueurs = new Joueur[NOMBRE_JOUEURS];
 
-
-            joueurs[0] = new Joueur("J1");
-            joueurs[1] = new Joueur("J2");
-            joueurs[2] = new Joueur("J3");
-            joueurs[3] = new Joueur("J4");
+            for(int j = 0; j<NOMBRE_JOUEURS;j++)
+            {
+                joueurs[j] = new Joueur("Joueur " + j+1);
+            }
 
         }
 
@@ -48,11 +49,11 @@ namespace JeuDomino
         public void Jouer()
         {
 
-            for(int i = 0; i < 4 ; i++ )
+            for(int i = 0; i < NOMBRE_JOUEURS; i++ )
             {
                 joueurs[i].Jeu = paquet.Distribue(NOMBRE_DOMINOS);
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < NOMBRE_JOUEURS; i++)
             {
                 Console.WriteLine($"{joueurs[i]} valeur: {joueurs[i].Valeur()}");
             }
