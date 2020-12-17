@@ -2,7 +2,7 @@
 
 namespace JeuDomino
 {
-    class Program
+    class TestDomino
     {
         static void Main(string[] args)
         {

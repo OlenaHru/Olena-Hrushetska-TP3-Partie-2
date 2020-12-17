@@ -4,6 +4,10 @@ using System.Text;
 
 namespace JeuDomino
 {
+    /// <summary>
+    /// Classe statique contenant quelques utilitaires
+    /// concernant le jeu
+    /// </summary>
     public static class DominoUtil
     {
         public static string AffichageJeu(Domino[] dominos)
