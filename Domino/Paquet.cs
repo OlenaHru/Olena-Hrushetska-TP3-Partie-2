@@ -120,10 +120,7 @@ namespace JeuDomino
                 int x= rand.Next(0, Dominos.Length);
                 int y= rand.Next(0, Dominos.Length);
                 Permuter(x, y);
-
             }
-
-
         }
     }
 }
