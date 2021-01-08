@@ -11,8 +11,9 @@ namespace JeuDomino
     {
         /// <summary>
         /// La plus grande valeur sur un domino
+        /// En general 6 (mais peut etre modifiee)
         /// </summary>
-        public const int MAX_VALUE = 7;
+        public const int MAX_VALUE = 6;
         
         private int gauche;
        
@@ -25,7 +26,7 @@ namespace JeuDomino
             {
                 return gauche;
             }
-            set
+            private set
             {
                 if (0 <= value && value <= MAX_VALUE)
                 {
@@ -46,7 +47,7 @@ namespace JeuDomino
             {
                 return droite;
             }
-            set
+            private set
             {
                 if (0 <= value && value <= MAX_VALUE)
                 {

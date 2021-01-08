@@ -37,7 +37,7 @@ namespace JeuDomino
 
             for(int j = 0; j<NOMBRE_JOUEURS;j++)
             {
-                joueurs[j] = new Joueur("Joueur " + j+1);
+                joueurs[j] = new Joueur($"Joueur {j+1}");
             }
 
         }
