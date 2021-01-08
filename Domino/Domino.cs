@@ -26,7 +26,7 @@ namespace JeuDomino
             {
                 return gauche;
             }
-            private set
+            set
             {
                 if (0 <= value && value <= MAX_VALUE)
                 {
@@ -47,7 +47,7 @@ namespace JeuDomino
             {
                 return droite;
             }
-            private set
+            set
             {
                 if (0 <= value && value <= MAX_VALUE)
                 {
