@@ -5,6 +5,7 @@ using System.Text;
 namespace JeuDomino
 {
     /// <summary>
+    ///Test
     /// Classe statique contenant quelques utilitaires
     /// concernant le jeu
     /// </summary>
