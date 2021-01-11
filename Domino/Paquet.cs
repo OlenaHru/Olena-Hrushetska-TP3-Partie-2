@@ -9,7 +9,7 @@ namespace JeuDomino
     /// </summary>
     public class Paquet
     {
-
+        ///
         /// <summary>
         /// Le nombre d'itérations pour mélanger
         /// </summary>
@@ -74,6 +74,11 @@ namespace JeuDomino
             {
                 prochain = Dominos[SommetPile];
                 SommetPile++;
+                /************************************/
+                if (SommetPile >= NOMBRE_DOMINOS - 1)
+                {
+                    SommetPile = 0;
+                }/****************************************/
             }
             return prochain;
         }

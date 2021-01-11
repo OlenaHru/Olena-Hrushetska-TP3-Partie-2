@@ -110,5 +110,23 @@ namespace JeuDomino
             }
             return valeur;
         }
+        //
+        /*****************************************************/
+        /// <summary>
+        /// Une méthode  qui permute les deux côtés de domino
+        /// </summary>
+        /// <param name="domino"></param>
+        /// <returns>vrai ou faux</returns>
+        public Domino Permute(Domino domino)
+        {
+            int temp = domino.Gauche;
+            domino.Gauche = domino.Droite;
+            domino.Droite = temp;
+
+            return domino;
+
+        }
+        /****************************************************/
+        //
     }
 }

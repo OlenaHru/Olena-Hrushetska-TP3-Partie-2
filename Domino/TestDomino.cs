@@ -2,29 +2,51 @@
 
 namespace JeuDomino
 {
-    class TestDomino
-    {
-        static void Main(string[] args)
-        {
-			TesterDominos();
+	class TestDomino
+	{
+		static void Main(string[] args)
+		{
+			//TesterDominos();
 
-			TesterPaquet();
+			//TesterPaquet();
 
 			TesterJouer();
-			
-            Console.ReadKey();
 
-        }
+			Console.ReadKey();
 
-		private static void TesterJouer() {
-
-			Console.WriteLine();
-			Console.WriteLine(); 
-			Console.WriteLine("JOUER");
-			new Jeu().Jouer();
 		}
 
-		private static void TesterPaquet() {
+		private static void TesterJouer()
+		{
+			int count = 1;
+			bool fini = false;
+			Console.WriteLine();
+			Jeu domino = new Jeu();
+			while (!fini)
+			{
+				Console.WriteLine();
+				Console.WriteLine($"JOUER le jeu " + count);
+				domino.Jouer();
+				count++;
+
+				foreach (Joueur joueur in domino.Joueurs)
+				{
+					if (joueur.Score >= 100)
+					{
+						fini = true;
+						Console.WriteLine("******************************************************");
+						Console.WriteLine($"{joueur.NomJoueur} a gagné la partie!!!!!!!!!!");
+						Console.WriteLine("******************FINI*******************************");
+						break;
+					}
+				}
+
+			}
+
+		}
+
+		private static void TesterPaquet()
+		{
 			Paquet paquet = new Paquet();
 
 			Console.WriteLine();
@@ -38,9 +60,9 @@ namespace JeuDomino
 
 
 		private static void TesterDominos()
-        {
+		{
 			// Déclaration et instantiation des objets de type Domino
-			Domino d1 = new Domino(1,2);
+			Domino d1 = new Domino(1, 2);
 			Domino d2 = new Domino(1, 0);
 			Domino d3 = new Domino(2, 6);
 			Domino d4 = new Domino(5, 5);
@@ -49,6 +71,7 @@ namespace JeuDomino
 			Console.WriteLine(d50.Equals(d5));
 
 			// Afficher chaque domino
+			Console.WriteLine(d1);
 			Console.WriteLine(d2);
 			Console.WriteLine(d3);
 			Console.WriteLine(d4);
@@ -73,5 +96,5 @@ namespace JeuDomino
 		}
 
 
-    }
+	}
 }
