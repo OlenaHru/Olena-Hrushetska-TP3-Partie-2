@@ -57,6 +57,7 @@ namespace JeuDomino
                 {
                     avoirDomino = true;
                     positionDomino = jeu.IndexOf(domino);
+                    break;
                 }
             }
             return avoirDomino;

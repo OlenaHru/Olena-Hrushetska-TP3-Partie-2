@@ -47,10 +47,10 @@ namespace JeuDomino
 
                     tableJeu.Add(domino);
                     Console.WriteLine();
-                    Console.WriteLine($"le Joueur {i + 1} commence!!! ");
-                    Console.WriteLine($"le Joueur {i + 1} a joué:  {domino}");
+                    Console.WriteLine($" Joueur {i + 1} commence!!! ");
+                    Console.WriteLine($"-> le Joueur {i + 1} a joué:  {domino}");
                     point = domino;
-                    turnJoueur = i;
+                    turnJoueur = i+1;
                     AffichageTableJou();
                     break;
                 }
@@ -58,10 +58,10 @@ namespace JeuDomino
         }
 
         public void ContinuationTurn()
-        {
+         {
             //Definir premier Joueur et faire une boucle pour quil ne depasse pas de 4 (ver porque 5)
-            turnJoueur += 1;
-            if (turnJoueur == 4)
+           
+             if (turnJoueur == 4)
             {
                 turnJoueur = 0;
             }
@@ -71,7 +71,7 @@ namespace JeuDomino
             if (joueurs[turnJoueur].AvoirDomino(point))
             {
                 Domino domino = joueurs[turnJoueur].DominoSorti();//???????????????????????
-                Console.WriteLine($"le Joueur {turnJoueur} a joue {domino}");
+                message=$"->le Joueur {turnJoueur+1} a joue {domino}";
 
                 if (domino.Gauche == tableJeu[0].Gauche)
                 {
@@ -98,14 +98,13 @@ namespace JeuDomino
                 domino.Droite = tableJeu[tableJeu.Count - 1].Droite;
                 point = domino;//esto esta mal tengo que fabricarlo con las dos puntas
                 Joueurs[turnJoueur].Jeu.Remove(domino);
-                message = $"-> {Joueurs[turnJoueur].NomJoueur} a mit domino: {domino} sur la table ";
-                pas = true;
 
-
-            }
+                AffichageJou();
+                  pas = true;
+                }
 
             //definir pour quil commence a cero dans la prochain ronde
-            turnJoueur = NOMBRE_JOUEURS;
+              turnJoueur ++;
         }
 
 
@@ -150,7 +149,7 @@ namespace JeuDomino
         /// </summary>
         public void Jouer()
         {
-            bool pas = false;
+
             //************************************
             int bonus = 10;
             bool finiJou;
@@ -177,44 +176,44 @@ namespace JeuDomino
                 message = "";
 
                 //on trouve  le joueur qui débutera la partie est deplace lui a la position 0 dans la tableau de joueurs
-                PremierTurn();
-                Console.WriteLine();
-
-                for (int j = turnJoueur; turnJoueur < NOMBRE_JOUEURS; j++)
+                if (i == 0)
                 {
+                    PremierTurn();
+                }
 
+                for (int j = 0; j < NOMBRE_JOUEURS; j++)
+                {
                     ContinuationTurn();
-                    
-                    
-                    AffichageJou();
+
+
+                    //AffichageJou();
 
                     ////tous les autre pas
-                    
-                        if (!pas)
-                        {
-                            count++;
-                            Console.WriteLine($"-> Joueur {Joueurs[j].NomJoueur} a passé son tour, count: {count} ");
 
-                            //Les 4 joueurs ont dû passer leur tour
-                            if (count == NOMBRE_JOUEURS)
-                            {
-                                Console.WriteLine($"Les 4 joueurs ont dû passer leur tour!!!");
-                                finiJou = true;
-                            }
-                        }
-                    
-                    if (finiJou)
-
+                    if (!pas)
                     {
-                        AffichageValeurJou();
-                        break;
+                        count++;
+                        Console.WriteLine($"-> Joueur {Joueurs[j].NomJoueur} a passé son tour, count: {count} ");
+
+                        //Les 4 joueurs ont dû passer leur tour
+                        if (count == NOMBRE_JOUEURS)
+                        {
+                            Console.WriteLine($"Les 4 joueurs ont dû passer leur tour!!!");
+                            finiJou = true;
+                        }
                     }
                 }
-                if (finiJou)
-                {
-                    break;
-                }
+
             }
+
+            
+            //if (finiJou)
+            //{
+            //    AffichageValeurJou();
+            //    break;
+            //}
+        
+        
 
         }
 
