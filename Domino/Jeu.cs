@@ -12,7 +12,7 @@ namespace JeuDomino
         //
         //**********************************************
         private List<Domino> tableJeu;
-
+        bool pas = false;
 
         string message = "";
         int turnJoueur;
@@ -49,9 +49,9 @@ namespace JeuDomino
                     Console.WriteLine();
                     Console.WriteLine($"le Joueur {i + 1} commence!!! ");
                     Console.WriteLine($"le Joueur {i + 1} a joué:  {domino}");
-                    point = domino;//???????
+                    point = domino;
                     turnJoueur = i;
-                    Console.WriteLine($"la point de la table cest {point}");///????
+                    AffichageTableJou();
                     break;
                 }
             }
@@ -61,7 +61,7 @@ namespace JeuDomino
         {
             //Definir premier Joueur et faire une boucle pour quil ne depasse pas de 4 (ver porque 5)
             turnJoueur += 1;
-            if (turnJoueur == 5)
+            if (turnJoueur == 4)
             {
                 turnJoueur = 0;
             }
@@ -70,9 +70,37 @@ namespace JeuDomino
 
             if (joueurs[turnJoueur].AvoirDomino(point))
             {
-                Domino domino = joueurs[turnJoueur].DominoSorti();
-                tableJeu.Add(domino);
-                Console.WriteLine(domino);
+                Domino domino = joueurs[turnJoueur].DominoSorti();//???????????????????????
+                Console.WriteLine($"le Joueur {turnJoueur} a joue {domino}");
+
+                if (domino.Gauche == tableJeu[0].Gauche)
+                {
+                    domino.Permute(domino);
+                    tableJeu.Insert(0, domino);
+                }
+                else if (domino.Droite == tableJeu[0].Gauche)
+                {
+                    tableJeu.Insert(0, domino);
+                }
+                else if (domino.Droite == tableJeu[tableJeu.Count - 1].Droite)
+                {
+                    domino.Permute(domino);
+                    tableJeu.Add(domino);
+                }
+                else
+                {
+                    tableJeu.Add(domino);
+                }
+
+
+
+                domino.Gauche = tableJeu[0].Gauche;
+                domino.Droite = tableJeu[tableJeu.Count - 1].Droite;
+                point = domino;//esto esta mal tengo que fabricarlo con las dos puntas
+                Joueurs[turnJoueur].Jeu.Remove(domino);
+                message = $"-> {Joueurs[turnJoueur].NomJoueur} a mit domino: {domino} sur la table ";
+                pas = true;
+
 
             }
 
@@ -156,56 +184,12 @@ namespace JeuDomino
                 {
 
                     ContinuationTurn();
-                    pas = true;
-
+                    
+                    
+                    AffichageJou();
 
                     ////tous les autre pas
-                    if (pas)
-                    {
-                        foreach (Domino domino in Joueurs[j].Jeu)
-                        {
-                            //si le joueur va fair son pas 
-                            if (!finiJou && !pas && (domino.IsAdjacent(tableJeu[0]) || domino.IsAdjacent(tableJeu[tableJeu.Count - 1])))
-                            {
-                                if (domino.Gauche == tableJeu[0].Gauche)
-                                {
-
-                                    domino.Permute(domino);
-                                    tableJeu.Insert(0, domino);
-                                }
-                                else if (domino.Droite == tableJeu[0].Gauche)
-                                {
-                                    tableJeu.Insert(0, domino);
-                                }
-                                else if (domino.Droite == tableJeu[tableJeu.Count - 1].Droite)
-                                {
-                                    domino.Permute(domino);
-                                    tableJeu.Add(domino);
-                                }
-                                else
-                                {
-                                    tableJeu.Add(domino);
-                                }
-
-                                //supprime le Domino du tableau de domino de joueur
-                                Joueurs[j].Jeu.Remove(domino);
-                                message = $"-> {Joueurs[j].NomJoueur} a mit domino: {domino} sur la table ";
-                                AffichageJou();
-                                pas = true;
-
-                                //Un joueur a posé son dernier domino 
-                                if (Joueurs[j].Jeu.Count == 0)
-                                {
-                                    Console.WriteLine($"{Joueurs[j].NomJoueur} est gagnant(e)!!! ***Bonus 10points!!!***");
-                                    Joueurs[j].Score += bonus;
-                                    Joueur temp = Joueurs[0];
-                                    Joueurs[0] = Joueurs[j];
-                                    Joueurs[j] = temp;
-                                    finiJou = true;
-                                }
-                                break;
-                            }
-                        }
+                    
                         if (!pas)
                         {
                             count++;
@@ -218,7 +202,7 @@ namespace JeuDomino
                                 finiJou = true;
                             }
                         }
-                    }
+                    
                     if (finiJou)
 
                     {
@@ -252,13 +236,13 @@ namespace JeuDomino
             Console.WriteLine();
 
             Console.WriteLine(message);
-            AffichageTableDeJou();
+            AffichageTableJou();
         }
 
         /// <summary>
         /// Afficgage la table de jou
         /// </summary>
-        public void AffichageTableDeJou()
+        public void AffichageTableJou()
         {
             Console.WriteLine();
             Console.WriteLine("********************tableJeu de jou***********************");
