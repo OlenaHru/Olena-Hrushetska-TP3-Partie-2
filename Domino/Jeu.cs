@@ -48,14 +48,15 @@ namespace JeuDomino
                     tableJeu.Add(domino);
                     Console.WriteLine();
                     Console.WriteLine($" Joueur {i + 1} commence!!! ");
-                    Console.WriteLine($"-> le Joueur {i + 1} a joué:  {domino}");
+
+                    message=$"-> le Joueur {i + 1} a joué:  {domino}";
                     point = domino;
                     turnJoueur = i+1;
-                    AffichageTableJou();
+                    AffichageJou();
                     break;
                 }
             }
-        }
+          }
 
         public void ContinuationTurn()
          {
@@ -94,10 +95,10 @@ namespace JeuDomino
 
 
 
-                domino.Gauche = tableJeu[0].Gauche;
-                domino.Droite = tableJeu[tableJeu.Count - 1].Droite;
-                point = domino;//esto esta mal tengo que fabricarlo con las dos puntas
-                Joueurs[turnJoueur].Jeu.Remove(domino);
+                point.Gauche = tableJeu[0].Gauche;
+                point.Droite = tableJeu[tableJeu.Count - 1].Droite;
+                //point = domino;//esto esta mal tengo que fabricarlo con las dos puntas
+               // Joueurs[turnJoueur].Jeu.Remove(domino);
 
                 AffichageJou();
                   pas = true;
@@ -152,7 +153,7 @@ namespace JeuDomino
 
             //************************************
             int bonus = 10;
-            bool finiJou;
+            bool finiJeu;
             //************************************
             tableJeu = new List<Domino>();
             //
@@ -168,7 +169,7 @@ namespace JeuDomino
 
             //
             //*************************************
-            finiJou = false;
+            finiJeu = false;
 
             for (int i = 0; ; i++)
             {
@@ -181,39 +182,57 @@ namespace JeuDomino
                     PremierTurn();
                 }
 
-                for (int j = 0; j < NOMBRE_JOUEURS; j++)
+                for (int j = turnJoueur; j < NOMBRE_JOUEURS; j++)
                 {
-                    ContinuationTurn();
+                    
+                    if (!pas)
+                    {
+                        ContinuationTurn();
+                    }
+
 
 
                     //AffichageJou();
 
                     ////tous les autre pas
-
-                    if (!pas)
+                    if (Joueurs[j].Jeu.Count == 0)
                     {
-                        count++;
+                        message = $"{Joueurs[j].NomJoueur} est gagnant(e)!!!";
+                        Joueurs[j].Score += bonus;
+                        finiJeu = true;
+                        break;
+                    }
+                   
+                    if (!pas) 
+                         {
+                         count++;
                         Console.WriteLine($"-> Joueur {Joueurs[j].NomJoueur} a passé son tour, count: {count} ");
 
                         //Les 4 joueurs ont dû passer leur tour
                         if (count == NOMBRE_JOUEURS)
                         {
                             Console.WriteLine($"Les 4 joueurs ont dû passer leur tour!!!");
-                            finiJou = true;
+                            finiJeu = true;
                         }
+                        
                     }
+                    pas = false;
                 }
-
+                if (turnJoueur == 4)
+                {
+                    turnJoueur = 0;
+                }
+                if (finiJeu)
+                {
+                    AffichageValeurJou();
+                    break;
+                } 
             }
 
+
             
-            //if (finiJou)
-            //{
-            //    AffichageValeurJou();
-            //    break;
-            //}
-        
-        
+
+
 
         }
 
@@ -225,13 +244,13 @@ namespace JeuDomino
         {
             Console.ReadKey();
             Console.Clear();
-            Console.WriteLine();
+             Console.WriteLine();
             Console.WriteLine("*******************JOU DOMINO******************");
             Console.WriteLine();
             for (int i = 0; i < NOMBRE_JOUEURS; i++)
             {
                 Console.WriteLine($"{Joueurs[i]}");
-            }
+             }
             Console.WriteLine();
 
             Console.WriteLine(message);
