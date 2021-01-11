@@ -21,20 +21,8 @@ namespace JeuDomino
         //Emilio
         //**************************************************************
 
-
-        private Domino point;
-
-        public void Affichage()
-        {
-            for (int i = 0; i < NOMBRE_JOUEURS; i++)
-            {
-                {
-                    Console.WriteLine($"{joueurs[i]} valeur: {joueurs[i].Valeur()}");
-                }
-            }
-
-        }
-
+        private Domino point=new Domino(Domino.MAX_VALUE, Domino.MAX_VALUE);
+        
         public void PremierTurn()
         {
 
@@ -50,7 +38,7 @@ namespace JeuDomino
                     Console.WriteLine($" Joueur {i + 1} commence!!! ");
 
                     message=$"-> le Joueur {i + 1} a joué:  {domino}";
-                    point = domino;
+                    //point = domino;!!!!!!!!!!!!!!ici  ereur
                     turnJoueur = i+1;
                     AffichageJou();
                     break;
@@ -71,8 +59,8 @@ namespace JeuDomino
 
             if (joueurs[turnJoueur].AvoirDomino(point))
             {
-                Domino domino = joueurs[turnJoueur].DominoSorti();//???????????????????????
-                message=$"->le Joueur {turnJoueur+1} a joue {domino}";
+                Domino domino = joueurs[turnJoueur].DominoSorti();
+                 message=$"->le Joueur {turnJoueur+1} a joue {domino}";
 
                 if (domino.Gauche == tableJeu[0].Gauche)
                 {
@@ -95,13 +83,18 @@ namespace JeuDomino
 
 
 
-                point.Gauche = tableJeu[0].Gauche;
-                point.Droite = tableJeu[tableJeu.Count - 1].Droite;
+               
                 //point = domino;//esto esta mal tengo que fabricarlo con las dos puntas
                // Joueurs[turnJoueur].Jeu.Remove(domino);
 
                 AffichageJou();
-                  pas = true;
+                 
+                point.Gauche = tableJeu[0].Gauche;
+                
+                 point.Droite = tableJeu[tableJeu.Count - 1].Droite;
+
+
+                pas = true;
                 }
 
             //definir pour quil commence a cero dans la prochain ronde
@@ -127,6 +120,7 @@ namespace JeuDomino
         private Paquet paquet;
 
         public Joueur[] Joueurs { get => joueurs; set => joueurs = value; }
+       
 
         /// <summary>
         /// Le constructeur du jeu qui crée un paquet et un tableau de 4 joueurs
@@ -180,7 +174,7 @@ namespace JeuDomino
                 if (i == 0)
                 {
                     PremierTurn();
-                }
+                 }
 
                 for (int j = turnJoueur; j < NOMBRE_JOUEURS; j++)
                 {
@@ -204,7 +198,7 @@ namespace JeuDomino
                     }
                    
                     if (!pas) 
-                         {
+                            {
                          count++;
                         Console.WriteLine($"-> Joueur {Joueurs[j].NomJoueur} a passé son tour, count: {count} ");
 
@@ -251,7 +245,7 @@ namespace JeuDomino
             {
                 Console.WriteLine($"{Joueurs[i]}");
              }
-            Console.WriteLine();
+             Console.WriteLine();
 
             Console.WriteLine(message);
             AffichageTableJou();
@@ -267,7 +261,7 @@ namespace JeuDomino
             foreach (Domino domino in tableJeu)
             {
                 Console.Write(domino.ToString());
-            }
+             }
             Console.WriteLine();
             Console.WriteLine("*************************************************************");
             Console.WriteLine();
