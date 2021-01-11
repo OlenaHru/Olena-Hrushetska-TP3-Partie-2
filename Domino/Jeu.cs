@@ -251,7 +251,7 @@ namespace JeuDomino
                 Console.Write(domino.ToString());
             }
             Console.WriteLine();
-            Console.WriteLine("************************************************************");
+            Console.WriteLine("*************************************************************");
             Console.WriteLine();
         }
 
