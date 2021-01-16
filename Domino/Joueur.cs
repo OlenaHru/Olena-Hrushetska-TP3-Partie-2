@@ -119,7 +119,7 @@ namespace JeuDomino
         {
             return nomJoueur + " : " + DominoUtil.AffichageJeu(Jeu.ToArray());
         }
-
+        
         /// <summary>
         /// La valeur totale du jeu du joueur
         /// </summary>
@@ -134,6 +134,7 @@ namespace JeuDomino
             return score;
 
         }
+       
 
     }
 }

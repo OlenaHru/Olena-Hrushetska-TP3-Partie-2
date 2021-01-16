@@ -137,7 +137,29 @@ namespace JeuDomino
             }
 
         }
-
+        public List<Domino> TrierTableau(List<Domino> test)
+        {
+            int n = test.Count;
+            int valeurMax=0;
+            List < Domino > trie = new List<Domino>();
+            for(int i = 0; i < n; i++)
+            {
+                valeurMax = test[0].Valeur();
+                int index = 0;
+               for(int j=1;j<test.Count;j++)
+                {
+                    
+                    if (test[j].Valeur() > valeurMax) 
+                    {
+                        valeurMax = test[j].Valeur();
+                        index=test.IndexOf(test[j]);
+                    }
+                }
+                trie.Add(test[index]);
+                test.Remove(test[index]);                             
+            }
+            return trie;
+        }
         /// <summary>
         /// Jouer qui distribue 7 dominos à chaque joueurs
         /// et affiche son jeu. Elle devra etre modifiée pour simuler une ou des parties
@@ -155,7 +177,9 @@ namespace JeuDomino
             for (int i = 0; i < NOMBRE_JOUEURS; i++)
             {
                 Joueurs[i].Jeu = paquet.Distribue(NOMBRE_DOMINOS);
+                Joueurs[i].Jeu = TrierTableau(Joueurs[i].Jeu);
             }
+            
             for (int i = 0; i < NOMBRE_JOUEURS; i++)
             {
                 Console.WriteLine($"{Joueurs[i]} valeur: {Joueurs[i].Valeur()}");

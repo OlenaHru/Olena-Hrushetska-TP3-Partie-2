@@ -80,7 +80,26 @@ namespace JeuDomino
                     SommetPile = 0;
                 }/****************************************/
             }
+            
             return prochain;
+        }
+        public List<Domino> TrierTableau(List<Domino> test)
+        {
+            int n = test.Count;
+            int valeurMax = test[0].Valeur();
+            Domino temp = test[0];
+            for (int i = 0; i < n; i++)
+            {
+                foreach (Domino domino in test)
+                    if (domino.Valeur() > temp.Valeur())
+                    {
+                        test.Remove(domino);
+                        test.Insert(0, domino);
+                    }
+
+            }
+
+            return test;
         }
 
         /// <summary>
