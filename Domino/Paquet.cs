@@ -74,7 +74,7 @@ namespace JeuDomino
             {
                 prochain = Dominos[SommetPile];
                 SommetPile++;
-                /************************************/
+                /*************************************/
                 if (SommetPile >= NOMBRE_DOMINOS - 1)
                 {
                     SommetPile = 0;

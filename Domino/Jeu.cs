@@ -48,7 +48,7 @@ namespace JeuDomino
 
         public void ContinuationTurn()
          {
-            //Definir premier Joueur et faire une boucle pour quil ne depasse pas de 4 (ver porque 5)
+            //Definir premier Joueur et faire une boucle pour quil ne depasse pas de 4 (ver porque 5).
            
              if (turnJoueur == 4)
             {

@@ -121,7 +121,7 @@ namespace JeuDomino
         }
         
         /// <summary>
-        /// La valeur totale du jeu du joueur
+        /// La valeur totale du jeu du joueur 
         /// </summary>
         /// <returns>La valeur totale</returns>
         public int Valeur()

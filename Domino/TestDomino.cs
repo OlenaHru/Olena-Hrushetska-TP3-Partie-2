@@ -8,7 +8,7 @@ namespace JeuDomino
 		{
 			//TesterDominos();
 
-			//TesterPaquet();
+			// TesterPaquet();
 
 			TesterJouer();
 
